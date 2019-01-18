@@ -1,34 +1,35 @@
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/mega?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
     username: root
     password: 123456
-    driver-class-name: com.mysql.jdbc.Driver
+#    driver-class-name: com.mysql.jdbc.Driver spring2.x后推荐使用com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     druid:
-      stat-view-servlet:
+      stat-view-servlet: #配置durid监控台
         enabled: true
-        login-username: admin
-        login-password: 111111
-        allow: 127.0.0.1
-        deny: 192.168.0.3
+        login-username: admin #登录用户
+        login-password: 111111 #登录密码
+        allow: 127.0.0.1 #允许的访问ip
+        deny: 192.168.0.3 #不允许的访问ip
         reset-enable: false
-      web-stat-filter:
+      web-stat-filter: #配置druid监控台过滤
         enabled: true
         url-pattern: /*
         exclusions: '*js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*'
-#      initial-size: 5
-#      min-idle: 5
-#      max-active: 20
-#      max-wait: 6000
-#      pool-prepared-statements: true
-#      max-pool-prepared-statement-per-connection-size: 20
-      filters: wall,stat
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      max-wait: 6000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      filters: wall,stat 
       filter:
         wall:
-          enabled: true
-          db-type: mysql
+          enabled: true #开启sql防火墙
+          db-type: mysql #数据库类型
           config:
-            delete-allow: false
-            select-all-column-allow: false
-            update-allow: false
+            delete-allow: false #不允许删除
+            select-all-column-allow: false #不允许select所有列
+            update-allow: false #不允许更新
